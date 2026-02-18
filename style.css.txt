@@ -1,0 +1,53 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: white;
+  text-align: center;
+}
+
+h1, h2 {
+  margin-top: 40px;
+}
+
+input {
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: none;
+}
+
+button {
+  padding: 12px 20px;
+  font-size: 16px;
+  margin-left: 10px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background: #00c6ff;
+  color: white;
+}
+
+#benchy-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  padding: 40px;
+}
+
+.benchy-card {
+  background: rgba(255,255,255,0.1);
+  border-radius: 15px;
+  padding: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.benchy-card:hover {
+  transform: scale(1.05);
+}
+
+.locked {
+  opacity: 0.3;
+  pointer-events: none;
+}

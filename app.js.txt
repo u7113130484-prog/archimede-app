@@ -1,0 +1,78 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getDatabase, ref, set, onValue, update } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+
+// 🔥 COLLE TA CONFIG FIREBASE ICI
+const firebaseConfig = {
+  apiKey: "ICI",
+  authDomain: "ICI",
+  databaseURL: "ICI",
+  projectId: "ICI",
+  storageBucket: "ICI",
+  messagingSenderId: "ICI",
+  appId: "ICI"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+let username = null;
+
+window.enterGame = function() {
+  username = document.getElementById("username").value;
+  if(!username) return alert("Entrez un prénom");
+
+  document.getElementById("login-screen").style.display = "none";
+  document.getElementById("selection-screen").style.display = "block";
+
+  createBenchys();
+};
+
+function createBenchys() {
+  const container = document.getElementById("benchy-container");
+
+  for(let i=0;i<8;i++) {
+    const card = document.createElement("div");
+    card.className = "benchy-card";
+    card.innerText = "Benchy " + (i+1);
+
+    card.onclick = () => chooseBenchy(i);
+
+    container.appendChild(card);
+  }
+
+  listenLocks();
+}
+
+function chooseBenchy(id) {
+  const lockRef = ref(db, "locked/benchy"+id);
+  set(lockRef, username);
+
+  const playerRef = ref(db, "players/"+username);
+  set(playerRef, id);
+
+  document.getElementById("status").innerText = "Votre choix est validé";
+}
+
+function listenLocks() {
+  const lockRef = ref(db, "locked");
+  onValue(lockRef, (snapshot) => {
+    const data = snapshot.val();
+    const cards = document.querySelectorAll(".benchy-card");
+
+    cards.forEach((card,index) => {
+      if(data && data["benchy"+index]) {
+        card.classList.add("locked");
+      }
+    });
+  });
+}
+// Écoute phase du jeu
+const gameRef = ref(db, "game");
+
+onValue(gameRef, (snapshot) => {
+  const data = snapshot.val();
+  if(data && data.phase === "experiment") {
+    alert("Le maître lance l'expérience !");
+    // Ici on fera transition vers la simulation
+  }
+});

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mission Expertise - Sélection Benchy</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+<div id="login-screen">
+  <h1>Mission Expertise – Poussée d’Archimède</h1>
+  <input type="text" id="username" placeholder="Entrez votre prénom">
+  <button onclick="enterGame()">Entrer</button>
+</div>
+
+<div id="selection-screen" style="display:none;">
+  <h2>Choisissez votre Benchy</h2>
+  <div id="benchy-container"></div>
+  <p id="status"></p>
+</div>
+
+<script type="module" src="app.js"></script>
+
+</body>
+</html>

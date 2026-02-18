@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mission Expertise - Mode Maître</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+<h1>Mode Maître</h1>
+
+<h2>Joueurs connectés :</h2>
+<div id="player-list"></div>
+
+<br>
+<button onclick="startExperiment()">Lancer l'expérience</button>
+
+<script type="module" src="master.js"></script>
+
+</body>
+</html>
