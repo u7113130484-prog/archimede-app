@@ -26,21 +26,24 @@ const firebaseConfig = {
   appId: "1:134132081055:web:7dd963f770f2376b609daa"
 };
 
-// ============================
-// INITIALISATION
-// ============================
-
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
 let username = null;
 
 // ============================
-// LOGIN
+// BOUTON LOGIN
 // ============================
 
-window.enterGame = function () {
+document.addEventListener("DOMContentLoaded", () => {
+  const btn = document.getElementById("enterBtn");
+  btn.addEventListener("click", enterGame);
+});
+
+function enterGame() {
+
   const input = document.getElementById("username");
+
   if (!input.value) {
     alert("Entrez un prénom");
     return;
@@ -52,17 +55,19 @@ window.enterGame = function () {
   document.getElementById("selection-screen").style.display = "block";
 
   createBenchys();
-};
+}
 
 // ============================
-// CREATION BENCHYS 3D
+// CREATION BENCHYS
 // ============================
 
 function createBenchys() {
+
   const container = document.getElementById("benchy-container");
   container.innerHTML = "";
 
   for (let i = 1; i <= 8; i++) {
+
     const card = document.createElement("div");
     card.className = "benchy-card";
 
@@ -120,7 +125,6 @@ function create3DScene(canvas, index) {
 function chooseBenchy(id) {
 
   const lockRef = ref(db, "locked/benchy" + id);
-
   set(lockRef, username);
 
   const playerRef = ref(db, "players/" + username);
